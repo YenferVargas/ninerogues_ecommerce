@@ -24,3 +24,4 @@ venv
 *__pycache__/
 *migration/
 build/
+pnpm-lock.yaml
