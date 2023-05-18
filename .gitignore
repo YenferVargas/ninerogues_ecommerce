@@ -23,5 +23,5 @@ yarn-error.log*
 venv
 *__pycache__/
 *migration/
-build/
+# build/
 pnpm-lock.yaml
