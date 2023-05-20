@@ -102,8 +102,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
+
 DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres:///ninerogues"),
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'belleza_peruana',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': 3306,
+    }
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
