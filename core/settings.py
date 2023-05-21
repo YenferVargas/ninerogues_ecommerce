@@ -39,11 +39,22 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-PROJECT_APPS=['apps.user','apps.user_profile']
-ECOMMERCE_APPS=['apps.category','apps.product',
-'apps.cart', 'apps.shipping', 'apps.orders', 'apps.payment', 'apps.coupons', 'apps.wishlist',
-'apps.reviews'
+PROJECT_APPS=[
+    'apps.user',
+    'apps.user_profile'
 ]
+ECOMMERCE_APPS=[
+    'apps.category',
+    'apps.product',
+    'apps.cart', 
+    'apps.shipping', 
+    'apps.orders', 
+    'apps.payment', 
+    'apps.coupons', 
+    'apps.wishlist',
+    'apps.reviews'
+]
+
 THIRD_PARTY_APPS=[
     'corsheaders',
     'rest_framework',
@@ -106,14 +117,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'belleza_peruana',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': 3306,
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'NAME': os.environ.get('DB_DATABASE'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': int(os.environ.get('DB_PORT')),
     }
 }
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
+
+# DATABASES["default"]["ATOMIC_REQUESTS"] = True
+
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
@@ -239,14 +252,14 @@ AUTH_USER_MODEL="user.UserAccount"
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 
-if not DEBUG:
-    DEFAULT_FROM_EMAIL = 'Vudera - Academia de Software <mail@vudera.com>'
-    EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = env('EMAIL_HOST')
-    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-    EMAIL_PORT = env('EMAIL_PORT')
-    EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+# if not DEBUG:
+#     DEFAULT_FROM_EMAIL = 'Vudera - Academia de Software <mail@vudera.com>'
+#     EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+#     EMAIL_HOST = env('EMAIL_HOST')
+#     EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+#     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+#     EMAIL_PORT = env('EMAIL_PORT')
+#     EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
     # # django-ckeditor will not work with S3 through django-storages without this line in settings.py
     # AWS_QUERYSTRING_AUTH = False
@@ -274,3 +287,30 @@ if not DEBUG:
 
     # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
     # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+"""
+pyman makemigrations user
+pyman makemigrations user_profile
+pyman makemigrations category
+pyman makemigrations product
+pyman makemigrations cart
+pyman makemigrations shipping
+pyman makemigrations orders
+pyman makemigrations payment
+pyman makemigrations coupons
+pyman makemigrations wishlist
+pyman makemigrations reviews
+
+pyman migrate user
+pyman migrate user_profile
+pyman migrate category
+pyman migrate product
+pyman migrate cart
+pyman migrate shipping
+pyman migrate orders
+pyman migrate payment
+pyman migrate coupons
+pyman migrate wishlist
+pyman migrate reviews
+
+"""
